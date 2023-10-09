@@ -1,19 +1,14 @@
-NAME = libft.a
+NAME = libftprintf.a
 CC = gcc
-CFLAGS = 
-
-SRCS_B = 
+CFLAGS = -Wall -Wextra -Werror
+SRCS = ft_printf.c
 
 OBJS = $(SRCS:.c=.o)
-OBJS_B = $(SRCS_B:.c=.o)
 
 all:	$(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) rcs $(NAME) $(OBJS)
-
-bonus: $(NAME) $(OBJS_B)
-	$(AR) rcs $(NAME) $(OBJS_B)
 
 clean: 
 	$(RM) *.o
