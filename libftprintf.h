@@ -12,6 +12,7 @@
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
+# include "libft.h"
 # include <stdio.h>
 # include <stdarg.h>
 

@@ -14,10 +14,10 @@
 
 void	print_string(const char *value) //Función para imprimir el contenido, con el tamaño strlen.
 {
-	write(1, value, strlen(value));
+	write(1, value, ft_strlen(value));
 }
 
-int	ft_printf(char const *str, ...)
+/*int	ft_printf(char const *str, ...)
 {
 	//cuidadin si te paso "asas%"
 	va_list	args; //lista de Argumentos variables, funcionará como un iterador o puntero.
@@ -36,7 +36,7 @@ int	ft_printf(char const *str, ...)
 				print_string(va_args(args, int));
 			else if (*str == 'f')
 				print_string(va_args(args, int));
-			else if (*str == 'x')
+			else if (*str == 'x' || *str == 'X')
 				print_string(va_args(args, int));
 			else if (*str == 'X')
 				print_string(va_args(args, int));
@@ -51,4 +51,4 @@ int	ft_printf(char const *str, ...)
 		str++;
 	}
 	va_end (args, str); //Realiza una limpieza de la estructura
-}
+}*/
