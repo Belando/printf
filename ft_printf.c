@@ -10,20 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-
-void	print_string(const char *value) //Función para imprimir el contenido, con el tamaño strlen.
+#include "ft_printf.h"
+//Función para imprimir el contenido, con el tamaño strlen.
+void	print_string(const char *value)
 {
 	write(1, value, ft_strlen(value));
+}
+
+int	main(void)
+{
+	const char	*str = "helou";
+
+	print_string(str);
+	return (0);
 }
 
 /*int	ft_printf(char const *str, ...)
 {
 	//cuidadin si te paso "asas%"
-	va_list	args; //lista de Argumentos variables, funcionará como un iterador o puntero.
+	va_list	args; 
+	//lista de Argumentos variables, funcionará como un iterador o puntero.
 
-	va_start(args, str); //Pasamos nuestros argumentos variables y el argumento fijo de la función
-	while (*str) //Mientras que exista nuestra 
+	va_start(args, str); 
+	//Pasamos nuestros argumentos variables y el argumento fijo de la función
+	while (*str) 
+	//Mientras que exista nuestra 
 	{
 		if (*str == '%')
 		{

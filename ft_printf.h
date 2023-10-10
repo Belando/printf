@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbelando <fbelando@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 16:26:23 by fbelando          #+#    #+#             */
-/*   Updated: 2023/10/09 16:26:28 by fbelando         ###   ########.fr       */
+/*   Created: 2023/10/10 15:03:04 by fbelando          #+#    #+#             */
+/*   Updated: 2023/10/10 15:03:09 by fbelando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
-# include "libft.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include "./libft/libft.h"
 # include <stdio.h>
 # include <stdarg.h>
 

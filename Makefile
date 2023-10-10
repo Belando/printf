@@ -4,26 +4,25 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 SRCS = ft_printf.c 
-
 OBJS = $(SRCS:.c=.o)
 
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS) $(LIBFT)
 	$(AR) rcs $(NAME) $(OBJS) $(LIBFT)
 
-$(OBJS): %.o: %.c libftprintf.h
+$(OBJS): %.o: %.c ft_printf.h
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
 
 clean: 
-	make -C $(LIBFT_DIR) clean
+	@make -C $(LIBFT_DIR) clean
 	$(RM) $(OBJS)
 
 fclean: clean
-	make -C $(LIBFT_DIR) fclean
+	@make -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean all
