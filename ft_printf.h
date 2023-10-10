@@ -18,5 +18,12 @@
 
 int		ft_printf(char const *str, ...);
 void	print_string(const char *value);
+void    ft_parser_octal(va_list arg, int *total, char step);
+void    ft_parser_pointer(va_list arg, int *total, char step);
+void    ft_parser_hexa(va_list arg, int *total, char step);
+void    ft_parser_unsigned_int(va_list arg, int *total, char step);
+void    ft_parser_integer(va_list arg, int *total, char step);
+void    ft_parser_string(va_list arg, int *total);
+void    ft_parser_char(va_list arg, int *total);
 
 #endif

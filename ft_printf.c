@@ -25,7 +25,7 @@ int	main(void)
 	return (0);
 }
 
-/*int	ft_printf(char const *str, ...)
+int	ft_printf(char const *str, ...)
 {
 	//cuidadin si te paso "asas%"
 	va_list	args; 
@@ -62,4 +62,4 @@ int	main(void)
 		str++;
 	}
 	va_end (args, str); //Realiza una limpieza de la estructura
-}*/
+}

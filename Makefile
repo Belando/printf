@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-SRCS = ft_printf.c 
+SRCS = ft_printf.c ft_parser.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(LIBFT) $(NAME)
