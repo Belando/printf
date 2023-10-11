@@ -26,11 +26,16 @@ void	ft_parser_string(va_list arg, int *total)
 	char	*str;
 
 	str = va_arg(arg, char *);
-	ft_putstr_fd(str, 1);
-	if (!str)
-		*total = *total + 0;
+	if (str == NULL)
+	{	
+		*total += 6;
+		ft_putstr_fd("(null)", 1);
+	}
 	else
+	{
 		*total = *total + ft_strlen(str);
+		ft_putstr_fd(str, 1);
+	}
 }
 
 void	ft_parser_integer(va_list arg, int *total)

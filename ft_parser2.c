@@ -71,26 +71,23 @@ void	ft_parser_pointer(va_list arg, int *total)
 	t_data	vars;
 
 	vars.i = va_arg(arg, unsigned int);
+	vars.length = 0;
 	if (vars.i == 0)
 	{
-		ft_putstr_fd("0x", 1);
-		ft_putchar_fd(vars.i, 1);
-		(*total)++;
+		ft_putstr_fd("0x0", 1);
+		*total += 3;
+		return ;
 	}
-	else
+	while (vars.i > 0)
 	{
-		while (vars.i > 0)
-		{
-			vars.buffer[vars.length++] = '0' + (vars.i % 16);
-			vars.i /= 16;
-		}
-		vars.j = 2;
-		while (vars.j >= 2)
-		{
-			ft_putstr_fd("0x", 1);
-			ft_putchar_fd(vars.buffer[vars.j], 1);
-			vars.j--;
-		}
-		*total = *total + vars.length + 2;
+		vars.buffer[vars.length++] = '0' + (vars.i % 16);
+		vars.i /= 16;
 	}
+	ft_putstr_fd("0x", 1);
+	while (vars.length > 0)
+	{
+		ft_putchar_fd(vars.buffer[vars.length - 1], 1);
+		vars.length--;
+	}
+	*total += 2;
 }
