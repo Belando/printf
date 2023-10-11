@@ -11,58 +11,57 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-//Función para imprimir el contenido, con el tamaño strlen.
-void	print_string(const char *value)
+
+void	ft_parse_arg(char step, va_list args, int *total)
 {
-	write(1, value, ft_strlen(value));
-}
-
-int	main(void)
-{
-	const char	*str = "helou";
-
-	print_string(str);
-	return (0);
-}
-//cuidadin si te paso "asas%"
-
-/*int	ft_printf(char const *str, ...)
-{
-	va_list	args;
-	//lista de Argumentos variables, funcionará como un iterador o puntero.
-
-	va_start(args, str);
-	//Pasamos nuestros argumentos variables y el argumento fijo de la función
-	while (*str)
-	//Mientras que exista nuestra 
+	if (step == 's')
+		ft_parser_string(args, total);
+	else if (step == 'd')
+		ft_parser_unsigned_int(args, total);
+	else if (step == 'c')
+		ft_parser_char(args, total);
+	else if (step == 'u')
+		ft_parser_unsigned_int(args, total);
+	else if (step == 'x' || step == 'X')
+		ft_parser_hexa(args, total);
+	else if (step == 'i')
+		ft_parser_integer(args, total);
+	else if (step == 'p')
+		ft_parser_pointer(args, total);
+	else
 	{
-		if (*str == '%')
-		{
-			str++;
-			//Avanzamos para ver el formato tras %.
-			if (*str == 's')
-				print_string(va_args(args, int));
-			else if (*str == 'd')
-				print_string(va_args(args, int));
-			else if (*str == 'c')
-				print_string(va_args(args, int));
-			else if (*str == 'f')
-				print_string(va_args(args, int));
-			else if (*str == 'x' || *str == 'X')
-				print_string(va_args(args, int));
-			else if (*str == 'X')
-				print_string(va_args(args, int));
-			else
-			{
-				putchar('%');
-				putchar(*str);
-			}
-		}
-		else
-			putchar(*str);
-			//Imprimes carácteres normales
-		str++;
+		ft_putchar_fd(step, 1);
+		*total += 1;
 	}
-	va_end (args, str);
-	//Realiza una limpieza de la estructura
-}*/
+}
+
+int	ft_printf(char const *str, ...)
+{
+	int			total;
+	const char	*step;
+	va_list		args;
+
+	total = 0;
+	va_start(args, str);
+	step = str;
+	while (*step != '\0')
+	{
+		while (*step != '%')
+		{
+			if (*step == '\0')
+				return (total);
+			ft_putchar_fd(*step, 1);
+			step++;
+			total++;
+		}
+		step++;
+		ft_parse_arg(*step, args, &total);
+		step++;
+	}
+	va_end(args);
+	return (total);
+}
+
+/* Pasamos nuestros argumentos variables y el argumento fijo de la función
+lista de Argumentos variables, funcionará como un iterador o puntero.
+Realiza una limpieza de la estructura*/
