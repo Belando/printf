@@ -24,21 +24,22 @@ int	main(void)
 	print_string(str);
 	return (0);
 }
+//cuidadin si te paso "asas%"
 
-int	ft_printf(char const *str, ...)
+/*int	ft_printf(char const *str, ...)
 {
-	//cuidadin si te paso "asas%"
-	va_list	args; 
+	va_list	args;
 	//lista de Argumentos variables, funcionará como un iterador o puntero.
 
-	va_start(args, str); 
+	va_start(args, str);
 	//Pasamos nuestros argumentos variables y el argumento fijo de la función
-	while (*str) 
+	while (*str)
 	//Mientras que exista nuestra 
 	{
 		if (*str == '%')
 		{
-			str++; //Avanzamos para ver el formato tras %.
+			str++;
+			//Avanzamos para ver el formato tras %.
 			if (*str == 's')
 				print_string(va_args(args, int));
 			else if (*str == 'd')
@@ -58,8 +59,10 @@ int	ft_printf(char const *str, ...)
 			}
 		}
 		else
-			putchar(*str); //Imprimes carácteres normales
+			putchar(*str);
+			//Imprimes carácteres normales
 		str++;
 	}
-	va_end (args, str); //Realiza una limpieza de la estructura
-}
+	va_end (args, str);
+	//Realiza una limpieza de la estructura
+}*/
