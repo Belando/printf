@@ -32,5 +32,6 @@ void	ft_parser_unsigned_int(va_list arg, int *total);
 void	ft_parser_integer(va_list arg, int *total);
 void	ft_parser_string(va_list arg, int *total);
 void	ft_parser_char(va_list arg, int *total);
+void	ft_putnbr_uns(unsigned int n, int fd);
 
 #endif
