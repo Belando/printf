@@ -38,20 +38,24 @@ void	ft_parser_string(va_list arg, int *total)
 	}
 }
 
-void	ft_parser_integer(va_list arg, int *total)
+void	ft_parse_integer(int num, int *total)
 {
-	unsigned int	i;
-	unsigned int	temp;
-	int				length;
+	int	length;
+	int	temp;
 
-	i = va_arg(arg, unsigned int);
-	ft_putnbr_fd(i, 1);
-	if (i == 0)
-		*total = *total;
+	length = 0;
+	ft_putnbr_fd(num, 1);
+	if (num == 0)
+		*total += 1;
 	else
 	{
-		temp = i;
-		length = 0;
+		if (num < 0)
+		{
+			temp = -num;
+			length++;
+		}
+		else
+			temp = num;
 		while (temp != 0)
 		{
 			temp /= 10;
@@ -61,25 +65,18 @@ void	ft_parser_integer(va_list arg, int *total)
 	}
 }
 
+void	ft_parser_integer(va_list arg, int *total)
+{
+	int	num;
+
+	num = va_arg(arg, int);
+	ft_parse_integer(num, total);
+}
+
 void	ft_parser_unsigned_int(va_list arg, int *total)
 {
-	unsigned int	i;
-	unsigned int	temp;
-	int				length;
+	unsigned int	num;
 
-	i = va_arg(arg, unsigned int);
-	ft_putnbr_fd(i, 1);
-	if (i == 0)
-		*total = *total;
-	else
-	{
-		temp = i;
-		length = 0;
-		while (temp != 0)
-		{
-			temp /= 10;
-			length++;
-		}
-		*total += length;
-	}
+	num = va_arg(arg, unsigned int);
+	ft_parse_integer(num, total);
 }
