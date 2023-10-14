@@ -26,7 +26,6 @@ typedef struct s_data
 
 int		ft_printf(char const *str, ...);
 void	print_string(const char *value);
-//void	print_hex_number(unsigned int num, int upper, int *total);
 void	ft_parser_pointer(va_list arg, int *total);
 void	ft_parser_hexa(va_list arg, int *total, int upper);
 void	ft_parser_unsigned_int(va_list arg, int *total);

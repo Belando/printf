@@ -55,7 +55,7 @@ int	ft_printf(char const *str, ...)
 		while (*step != '%')
 		{
 			if (*step == '\0')
-				return (total);
+				return (va_end(args), total);
 			ft_putchar_fd(*step, 1);
 			step++;
 			total++;
@@ -82,5 +82,7 @@ Realiza una limpieza de la estructura*/
 	printf(" %u \n", 0);
 	ft_printf(" %u\n ", 0);
 	printf(" %u \n", -1);
-	ft_printf(" %u ", -1);
+	ft_printf(" %u\n ", -1);
+	printf("%u\n", -200000);
+	ft_printf("%u", -200000);
 }*/
