@@ -15,7 +15,6 @@
 # include <stdio.h>
 # include <stdarg.h>
 # include <unistd.h>
-# include <string.h>
 # include <limits.h>
 
 typedef struct s_data
@@ -37,5 +36,6 @@ int		ft_putnbr_uns(unsigned int n, int fd);
 int		ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(char *s, int fd);
 int		ft_putnbr_fd(int n, int fd);
+size_t	ft_(const char *str);
 
 #endif

@@ -12,13 +12,20 @@
 
 #include "ft_printf.h"
 
+size_t	ft_(const char *str)
+{
+	size_t	count;
+
+	count = 0;
+	while (str[count] != '\0')
+		count++;
+	return (count);
+}
+
 int	ft_putchar_fd(char c, int fd)
 {
-	int	ret;
-
-	ret = write(fd, &c, 1);
-	if (ret == (int)-1)
-		return (ret);
+	if (write(fd, &c, 1) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -36,9 +43,7 @@ int	ft_putstr_fd(char *s, int fd)
 int	ft_putnbr_fd(int n, int fd)
 {
 	long			num;
-	static int		ret;
 
-	ret = 1;
 	num = n;
 	if (num < 0)
 	{
@@ -55,17 +60,15 @@ int	ft_putnbr_fd(int n, int fd)
 	}
 	else
 		if (ft_putchar_fd(num + '0', fd) == -1)
-			ret = -1;
-	return (ret);
+			return (-1);
+	return (0);
 }
 
 int	ft_putnbr_uns(unsigned int n, int fd)
 {
 	long			num;
-	static int		ret;
 
 	num = n;
-	ret = 1;
 	if (num >= 10)
 	{
 		if (ft_putnbr_uns(num / 10, fd) == -1)
@@ -76,7 +79,5 @@ int	ft_putnbr_uns(unsigned int n, int fd)
 	else
 		if (ft_putchar_fd(num + '0', fd) == -1)
 			return (-1);
-	if (ret == 0)
-		ret = -1;
-	return (ret);
+	return (0);
 }

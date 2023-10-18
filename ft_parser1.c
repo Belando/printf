@@ -36,7 +36,7 @@ int	ft_parser_string(va_list arg, int *total)
 	}
 	else
 	{
-		*total = *total + strlen(str);
+		*total = *total + ft_(str);
 		if (ft_putstr_fd(str, 1) == -1)
 			return (-1);
 	}
