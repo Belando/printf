@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	ft_parser_hexa(va_list arg, int *total, int upper)
+int	ft_parser_hexa(va_list arg, int *total, int upper)
 {
 	t_data	vars;
 
@@ -20,11 +20,10 @@ void	ft_parser_hexa(va_list arg, int *total, int upper)
 	vars.length = 0;
 	if (vars.i == 0)
 	{
-		ft_putchar_fd('0', 1);
+		if (ft_putchar_fd('0', 1) == -1)
+			return (-1);
 		(*total)++;
 	}
-	if (vars.i < 0)
-		vars.i = UINT_MAX + vars.i + 1;
 	while (vars.i > 0)
 	{
 		vars.buffer[vars.length++] = "0123456789ABCDEF"[vars.i % 16];
@@ -32,16 +31,17 @@ void	ft_parser_hexa(va_list arg, int *total, int upper)
 			vars.buffer[vars.length - 1] = "0123456789abcdef"[vars.i % 16];
 		vars.i /= 16;
 	}
-	vars.j = vars.length - 1;
-	while (vars.j >= 0)
+	while (vars.length - 1 >= 0)
 	{
-		ft_putchar_fd(vars.buffer[vars.j], 1);
-		vars.j--;
+		if (ft_putchar_fd(vars.buffer[vars.length - 1], 1) == -1)
+			return (-1);
+		vars.length--;
 		(*total)++;
 	}
+	return (0);
 }
 
-void	ft_parser_pointer(va_list arg, int *total)
+int	ft_parser_pointer(va_list arg, int *total)
 {
 	t_data	vars;
 
@@ -49,7 +49,8 @@ void	ft_parser_pointer(va_list arg, int *total)
 	vars.length = 0;
 	if (vars.i == 0)
 	{
-		ft_putchar_fd('0', 1);
+		if (ft_putchar_fd('0', 1) == -1)
+			return (-1);
 		(*total)++;
 	}
 	if (vars.i < 0)
@@ -59,11 +60,12 @@ void	ft_parser_pointer(va_list arg, int *total)
 		vars.buffer[vars.length++] = "0123456789abcdef"[vars.i % 16];
 		vars.i /= 16;
 	}
-	vars.j = vars.length - 1;
-	while (vars.j >= 0)
+	while (vars.length - 1 >= 0)
 	{
-		ft_putchar_fd(vars.buffer[vars.j], 1);
-		vars.j--;
+		if (ft_putchar_fd(vars.buffer[vars.length - 1], 1) == -1)
+			return (-1);
+		vars.length--;
 		(*total)++;
 	}
+	return (0);
 }

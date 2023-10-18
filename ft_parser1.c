@@ -12,30 +12,18 @@
 
 #include "ft_printf.h"
 
-void	ft_parser_char(va_list arg, int *total)
+int	ft_parser_char(va_list arg, int *total)
 {
 	unsigned int	i;
 
 	i = va_arg(arg, unsigned int);
-	ft_putchar_fd(i, 1);
+	if (ft_putchar_fd(i, 1) == -1)
+		return (-1);
 	(*total)++;
+	return (0);
 }
 
-void	ft_putnbr_uns(unsigned int n, int fd)
-{
-	long	num;
-
-	num = n;
-	if (num >= 10)
-	{
-		ft_putnbr_uns(num / 10, fd);
-		ft_putnbr_uns(num % 10, fd);
-	}
-	else
-		ft_putchar_fd(num + '0', fd);
-}
-
-void	ft_parser_string(va_list arg, int *total)
+int	ft_parser_string(va_list arg, int *total)
 {
 	char	*str;
 
@@ -43,67 +31,72 @@ void	ft_parser_string(va_list arg, int *total)
 	if (str == NULL)
 	{	
 		*total += 6;
-		ft_putstr_fd("(null)", 1);
+		if (ft_putstr_fd("(null)", 1) == -1)
+			return (-1);
 	}
 	else
 	{
-		*total = *total + ft_strlen(str);
-		ft_putstr_fd(str, 1);
+		*total = *total + strlen(str);
+		if (ft_putstr_fd(str, 1) == -1)
+			return (-1);
 	}
+	return (0);
 }
 
-void	ft_parser_integer(va_list arg, int *total)
+int	ft_parser_integer(va_list arg, int *total)
 {
-	int	num;
-	int	length;
-	int	temp;
+	t_data	vars;
+	int		num;
 
 	num = va_arg(arg, int);
-	length = 0;
-	temp = num;
-	ft_putnbr_fd(num, 1);
+	vars.length = 0;
+	vars.temp = num;
+	if (ft_putnbr_fd(num, 1) == -1)
+		return (-1);
 	if (num == 0)
 		*total += 1;
 	else
 	{
 		if (num < 0)
 		{
-			temp = -num;
-			length++;
+			vars.temp = -num;
+			vars.length++;
 		}
-		while (temp != 0)
+		while (vars.temp != 0)
 		{
-			temp /= 10;
-			length++;
+			vars.temp /= 10;
+			vars.length++;
 		}
-		*total += length;
+		*total += vars.length;
 	}
+	return (0);
 }
 
-void	ft_parser_unsigned_int(va_list arg, int *total)
+int	ft_parser_unsigned_int(va_list arg, int *total)
 {
+	t_data			vars;
 	unsigned int	num;
-	int				length;
-	unsigned int	temp;
 
 	num = va_arg(arg, unsigned int);
-	length = 0;
-	temp = num;
-	ft_putnbr_uns(num, 1);
+	vars.length = 0;
+	vars.temp = num;
+	if (ft_putnbr_uns(num, 1) == -1)
+		return (-1);
 	if (num == 0)
 		*total += 1;
 	else
 	{
 		if (num < 0)
 		{
-			temp = -num;
-			length++;
+			vars.temp = -num;
+			vars.length++;
 		}
-		while (temp != 0)
+		while (vars.temp != 0)
 		{
-			temp /= 10;
-			length++;
+			vars.temp /= 10;
+			vars.length++;
 		}
-		*total += length;
+		*total += vars.length;
 	}
+	return (0);
 }

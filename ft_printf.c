@@ -12,32 +12,31 @@
 
 #include "ft_printf.h"
 
-void	ft_parse_arg(char step, va_list args, int *total)
+int	ft_parse_arg(char step, va_list args, int *total)
 {
 	if (step == 's')
-		ft_parser_string(args, total);
-	else if (step == 'd')
-		ft_parser_integer(args, total);
+		return (ft_parser_string(args, total));
+	else if (step == 'd' || step == 'i')
+		return (ft_parser_integer(args, total));
 	else if (step == 'c')
-		ft_parser_char(args, total);
+		return (ft_parser_char(args, total));
 	else if (step == 'u')
-		ft_parser_unsigned_int(args, total);
+		return (ft_parser_unsigned_int(args, total));
 	else if (step == 'x')
-		ft_parser_hexa(args, total, 0);
+		return (ft_parser_hexa(args, total, 0));
 	else if (step == 'X')
-		ft_parser_hexa(args, total, 1);
-	else if (step == 'i')
-		ft_parser_integer(args, total);
+		return (ft_parser_hexa(args, total, 1));
 	else if (step == 'p')
 	{
-		ft_putstr_fd("0x", 1);
+		if (ft_putstr_fd("0x", 1) == -1)
+			return (-1);
 		(*total) += 2;
-		ft_parser_pointer(args, total);
+		return (ft_parser_pointer(args, total));
 	}
 	else
 	{
-		ft_putchar_fd(step, 1);
 		*total += 1;
+		return (ft_putchar_fd(step, 1));
 	}
 }
 
@@ -56,21 +55,19 @@ int	ft_printf(char const *str, ...)
 		{
 			if (*step == '\0')
 				return (va_end(args), total);
-			ft_putchar_fd(*step, 1);
+			if (ft_putchar_fd(*step, 1) == -1)
+				return (-1);
 			step++;
 			total++;
 		}
 		step++;
-		ft_parse_arg(*step, args, &total);
+		if (ft_parse_arg(*step, args, &total) == -1)
+			return (-1);
 		step++;
 	}
 	va_end(args);
 	return (total);
 }
-
-/* Pasamos nuestros argumentos variables y el argumento fijo de la función
-lista de Argumentos variables, funcionará como un iterador o puntero.
-Realiza una limpieza de la estructura*/
 
 /*int	main (void)
 {
